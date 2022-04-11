@@ -22,9 +22,10 @@ public class ServletGetThreads extends HttpServlet {
             canDelete = (boolean) request.getAttribute("canLogin");
         }
         List<Integer> numOfThreads = new ArrayList<>();
+        List<String> nameOfThreads = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/forum", "root", "root")) {
 
-            String prikaz = "SELECT id FROM forum.forumthread;";
+            String prikaz = "SELECT * FROM forum.forumthread;";
 
             Statement statement = connection.createStatement();
 
@@ -32,6 +33,7 @@ public class ServletGetThreads extends HttpServlet {
 
             while (resultSet.next()) {
                 numOfThreads.add(resultSet.getInt("id"));
+                nameOfThreads.add(resultSet.getString("threadName"));
             }
 
         } catch (SQLException e) {
@@ -39,6 +41,7 @@ public class ServletGetThreads extends HttpServlet {
         }
         request.setAttribute("canDelete", canDelete);
         request.setAttribute("forumThreads", numOfThreads);
+        request.setAttribute("forumThreadNames", nameOfThreads);
         request.getRequestDispatcher("displayThreads.jsp").forward(request, response);
     }
 }

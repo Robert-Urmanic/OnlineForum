@@ -8,17 +8,26 @@
 <body>
 <%
     List<Integer> numOfThreads = (List<Integer>) request.getAttribute("forumThreads");
+    List<String> nameOfThreads = (List<String>) request.getAttribute("forumThreadNames");
+    int i = 0;
     for (Integer tempI: numOfThreads) {
         out.println("<form action=\"ServletThread\" method=\"post\">");
-        out.println("<p>Thread no. " + tempI + "</p>");
+        out.println("<p>"+ nameOfThreads.get(i) + ". Thread no. " + tempI + "</p>");
         out.println("<input type=\"hidden\" name=\"idThread\" value=\"" + tempI + "\">");
         out.println("<input type=\"submit\" name=\"showForum\" value=\"Enter\">");
         if ((boolean)request.getAttribute("canDelete")){
             out.println("<input type=\"submit\" name=\"deleteThread\" value=\"Delete\">");
         }
         out.println("</form>");
+        i++;
     }
 %>
-<p>${numOfThreads}</p>
+<h2>Create new thread</h2>
+<form action="ServletInsertThread" method="post">
+    <label for="threadName">Jméno: </label>
+    <input type="text" id="threadName" name="threadName" minlength="2" maxlength="30" required autofocus>
+
+    <input type="submit" name="createThread" value="Create new thread">
+</form>
 </body>
 </html>
