@@ -12,7 +12,10 @@
         out.println("<form action=\"ServletThread\" method=\"post\">");
         out.println("<p>Thread no. " + tempI + "</p>");
         out.println("<input type=\"hidden\" name=\"idThread\" value=\"" + tempI + "\">");
-        out.println("<input type=\"submit\" value=\"Enter\">");
+        out.println("<input type=\"submit\" name=\"showForum\" value=\"Enter\">");
+        if ((boolean)request.getAttribute("canDelete")){
+            out.println("<input type=\"submit\" name=\"deleteThread\" value=\"Delete\">");
+        }
         out.println("</form>");
     }
 %>

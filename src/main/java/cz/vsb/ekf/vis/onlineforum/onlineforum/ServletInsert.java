@@ -33,6 +33,8 @@ public class ServletInsert extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        String run = "run";
+        request.setAttribute("run",run);
         request.getRequestDispatcher("ServletThread").forward(request, response);
     }
 }

@@ -17,26 +17,49 @@ public class ServletThread extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<String> forumText = new ArrayList<>();
-        String sendText = "";
-        String id = request.getParameter("idThread");
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/forum", "root", "root")) {
+        if (request.getParameter("showForum") != null || request.getAttribute("run") != null) {
+            List<String> forumText = new ArrayList<>();
+            String sendText = "";
+            String id = request.getParameter("idThread");
+            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/forum", "root", "root")) {
 
-            String prikaz = "SELECT text FROM forum.forumtext WHERE threadId = " + id + ";";
+                String prikaz = "SELECT text FROM forum.forumtext WHERE threadId = " + id + ";";
 
-            Statement statement = connection.createStatement();
+                Statement statement = connection.createStatement();
 
-            ResultSet resultSet = statement.executeQuery(prikaz);
+                ResultSet resultSet = statement.executeQuery(prikaz);
 
-            while (resultSet.next()) {
-                forumText.add(resultSet.getString("text"));
+                while (resultSet.next()) {
+                    forumText.add(resultSet.getString("text"));
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+            request.setAttribute("idThread", id);
+            request.setAttribute("forumText", forumText);
+            request.getRequestDispatcher("forumIndex.jsp").forward(request, response);
+        } else if (request.getParameter("deleteThread") != null) {
+            String id = request.getParameter("idThread");
+            try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/forum", "root", "root")) {
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+                String prikaz1 = "DELETE FROM forum.forumtext WHERE threadId = " + id + ";";
+
+                PreparedStatement preparedStatement = connection.prepareStatement(prikaz1);
+
+                preparedStatement.executeUpdate();
+
+                String prikaz2 = "DELETE FROM forum.forumthread WHERE id = " + id + ";";
+
+                preparedStatement = connection.prepareStatement(prikaz2);
+
+                preparedStatement.executeUpdate();
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            request.getRequestDispatcher("ServletGetThreads").forward(request, response);
         }
-        request.setAttribute("idThread", id);
-        request.setAttribute("forumText", forumText);
-        request.getRequestDispatcher("forumIndex.jsp").forward(request, response);
     }
 }

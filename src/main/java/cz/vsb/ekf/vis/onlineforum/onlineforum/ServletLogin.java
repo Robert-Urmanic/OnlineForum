@@ -5,40 +5,40 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
-@WebServlet(name = "ServletGetThreads", value = "/ServletGetThreads")
-public class ServletGetThreads extends HttpServlet {
-    boolean canDelete = false;
+@WebServlet(name = "ServletLogin", value = "/ServletLogin")
+public class ServletLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
+        request.getRequestDispatcher("ServletGetThreads").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getAttribute("canLogin")!= null) {
-            canDelete = (boolean) request.getAttribute("canLogin");
-        }
-        List<Integer> numOfThreads = new ArrayList<>();
+        boolean login = false;
+
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/forum", "root", "root")) {
 
-            String prikaz = "SELECT id FROM forum.forumthread;";
+            String prikaz = "SELECT * FROM forum.adminlogin;";
 
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(prikaz);
 
             while (resultSet.next()) {
-                numOfThreads.add(resultSet.getInt("id"));
+                if(resultSet.getString("name") == request.getParameter("loginName")
+                        && resultSet.getString("password") == request.getParameter("loginPassword"));{
+                            login = true;
+                            break;
+                }
+
             }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        request.setAttribute("canDelete", canDelete);
-        request.setAttribute("forumThreads", numOfThreads);
-        request.getRequestDispatcher("displayThreads.jsp").forward(request, response);
+        request.setAttribute("canLogin", login);
+        request.getRequestDispatcher("ServletGetThreads").forward(request, response);
     }
 }
