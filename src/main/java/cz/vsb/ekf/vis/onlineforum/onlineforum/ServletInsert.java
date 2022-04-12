@@ -30,6 +30,8 @@ public class ServletInsert extends HttpServlet {
 
             preparedStatement.execute();
 
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

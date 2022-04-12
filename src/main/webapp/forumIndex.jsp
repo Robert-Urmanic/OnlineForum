@@ -45,11 +45,13 @@
             out.println("<div class=\"test\"><p>" + tempS + "</div>");
         }
         // make form redirect to new servlet which deletes message
-        if (request.getAttribute("canDelete").equals("true")) {
-            out.println("<input type=\"submit\" name=\"deleteMessage\" value=\"Delete\">");
-            out.println("<input type=\"hidden\" name=\"idOfText\" value=\"" + idOfText.get(i) + "\">");
-            out.println("<input type=\"hidden\" name=\"canDelete\" value=\"true\">");
-            out.println("<input type=\"hidden\" name=\"idThread\" value=\"" + request.getAttribute("idThread") + "\">");
+        if (request.getAttribute("canDelete") != null) {
+            if (request.getAttribute("canDelete").equals("true")) {
+                out.println("<input type=\"submit\" name=\"deleteMessage\" value=\"Delete\">");
+                out.println("<input type=\"hidden\" name=\"idOfText\" value=\"" + idOfText.get(i) + "\">");
+                out.println("<input type=\"hidden\" name=\"canDelete\" value=\"true\">");
+                out.println("<input type=\"hidden\" name=\"idThread\" value=\"" + request.getAttribute("idThread") + "\">");
+            }
         }
         i++;
         out.println("</form>");

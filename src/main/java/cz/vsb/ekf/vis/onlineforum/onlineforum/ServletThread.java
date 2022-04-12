@@ -23,6 +23,7 @@ public class ServletThread extends HttpServlet {
             List<Integer> idOfText = new ArrayList<>();
             String sendText = "";
             String id = request.getParameter("idThread");
+            System.out.println("ID: " + id);
             try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/forum", "root", "root")) {
 
                 String prikaz = "SELECT * FROM forum.forumtext WHERE threadId = " + id + ";";
@@ -39,9 +40,13 @@ public class ServletThread extends HttpServlet {
                 e.printStackTrace();
             }
             request.setAttribute("idThread", id);
+            System.out.println("ID:" + id);
             request.setAttribute("forumText", forumText);
+            System.out.println("forumText: " + forumText);
             request.setAttribute("canDelete", request.getParameter("canDelete"));
+            System.out.println("canDelete: " + request.getParameter("canDelete"));
             request.setAttribute("idOfText", idOfText);
+            System.out.println("idOfText:" + idOfText);
             request.getRequestDispatcher("forumIndex.jsp").forward(request, response);
         } else if (request.getParameter("deleteThread") != null) {
             String id = request.getParameter("idThread");
