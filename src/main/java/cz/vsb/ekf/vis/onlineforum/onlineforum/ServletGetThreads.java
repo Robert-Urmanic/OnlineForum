@@ -11,6 +11,7 @@ import java.util.List;
 @WebServlet(name = "ServletGetThreads", value = "/ServletGetThreads")
 public class ServletGetThreads extends HttpServlet {
     boolean canDelete = false;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -18,8 +19,7 @@ public class ServletGetThreads extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getAttribute("canLogin"));
-        if(request.getAttribute("canLogin")!= null) {
+        if (request.getAttribute("canLogin") != null) {
             canDelete = (boolean) request.getAttribute("canLogin");
         }
         List<Integer> numOfThreads = new ArrayList<>();

@@ -26,10 +26,11 @@ public class ServletLogin extends HttpServlet {
             ResultSet resultSet = statement.executeQuery(prikaz);
 
             while (resultSet.next()) {
-                if(resultSet.getString("name") == request.getParameter("loginName")
-                        && resultSet.getString("password") == request.getParameter("loginPassword"));{
-                            login = true;
-                            break;
+                if (resultSet.getString("name") == request.getParameter("loginName")
+                        && resultSet.getString("password") == request.getParameter("loginPassword")) ;
+                {
+                    login = true;
+                    break;
                 }
 
             }

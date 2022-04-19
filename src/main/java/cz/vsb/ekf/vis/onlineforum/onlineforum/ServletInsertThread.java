@@ -30,8 +30,9 @@ public class ServletInsertThread extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String run = "run";
-        request.setAttribute("run",run);
+
+
+        request.setAttribute("canDelete", request.getParameter("canDelete"));
         request.getRequestDispatcher("ServletGetThreads").forward(request, response);
     }
 }

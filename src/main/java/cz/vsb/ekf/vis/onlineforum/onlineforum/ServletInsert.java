@@ -31,12 +31,12 @@ public class ServletInsert extends HttpServlet {
             preparedStatement.execute();
 
 
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         String run = "run";
-        request.setAttribute("run",run);
+        request.setAttribute("run", run);
+        request.setAttribute("canDelete", request.getParameter("canDelete"));
         request.getRequestDispatcher("ServletThread").forward(request, response);
     }
 }

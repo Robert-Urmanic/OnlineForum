@@ -1,26 +1,11 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.time.LocalDateTime" %><%--
-  Created by IntelliJ IDEA.
-  User: urman
-  Date: 03.04.2022
-  Time: 19:42
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.time.LocalDateTime" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
-    <style>
-        .test {
-            background-color: aqua;
-            margin: 10px;
-            padding: 5px;
-            width: max-content;
-            height: max-content;
-            text-align: left;
-        }
-    </style>
+
 </head>
 <body>
 <%
@@ -32,6 +17,7 @@
     <input type="submit" value="Odeslat">
     <%
         out.println("<input type=\"hidden\" name=\"idThread\" value=\"" + request.getAttribute("idThread") + "\">");
+        out.println("<input type=\"hidden\" name=\"canDelete\" value=\"" + request.getAttribute("canDelete") + "\">");
     %>
 </form>
 
@@ -44,7 +30,6 @@
         {
             out.println("<div class=\"test\"><p>" + tempS + "</div>");
         }
-        // make form redirect to new servlet which deletes message
         if (request.getAttribute("canDelete") != null) {
             if (request.getAttribute("canDelete").equals("true")) {
                 out.println("<input type=\"submit\" name=\"deleteMessage\" value=\"Delete\">");
