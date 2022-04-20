@@ -19,6 +19,13 @@ public class ServletThread extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        /*
+        this servlet
+        1. displays text of specific thread
+        2. deletes chosen thread
+        3. deletes chosen message
+        attribute "run" was necessary to display text of specific thread when deleting messages or inserting them
+         */
         if (request.getParameter("showForum") != null || request.getAttribute("run") != null) {
             List<String> forumText = new ArrayList<>();
             List<Integer> idOfText = new ArrayList<>();

@@ -25,9 +25,9 @@
 
 %>
 <form class="threads" method="post" action="ServletInsert">
-    <label style="font-weight: bold; font-size: 20px" for="text">Zadejte text:</label>
-    <input type="text" id="text" name="text">
-    <input class="minibuttons" type="submit" value="Odeslat">
+    <label style="font-weight: bold; font-size: 20px" for="text">Enter text:</label>
+    <input type="text" id="text" name="text" required autofocus>
+    <input class="minibuttons" type="submit" value="Send">
     <%
         out.println("<input type=\"hidden\" name=\"idThread\" value=\"" + request.getAttribute("idThread") + "\">");
         out.println("<input type=\"hidden\" name=\"canDelete\" value=\"" + request.getAttribute("canDelete") + "\">");

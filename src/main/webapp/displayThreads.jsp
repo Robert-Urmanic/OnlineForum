@@ -46,7 +46,7 @@
 <div style="text-align:center;font-family:monospace;position: fixed;bottom: 0; right: 100;">
     <h2 style="font-size:25px;color:wheat">Create new thread</h2>
     <form action="ServletInsertThread" method="post">
-        <label class="threads" for="threadName">Jméno: </label>
+        <label class="threads" for="threadName">Thread topic: </label>
         <input type="text" id="threadName" name="threadName" minlength="2" maxlength="30" required autofocus>
         <input type="hidden" name="canDelete" value="<%=request.getAttribute("canDelete")%>">
         <input class="minibuttons" type="submit" name="createThread" value="Create new thread">

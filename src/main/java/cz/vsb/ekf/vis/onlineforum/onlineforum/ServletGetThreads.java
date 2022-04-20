@@ -42,6 +42,7 @@ public class ServletGetThreads extends HttpServlet {
             e.printStackTrace();
         }
         request.setAttribute("canDelete", canDelete);
+        // we pass the "canDelete" attribute or parameter in every jsp or Servlet to check passing privileges
         request.setAttribute("forumThreads", numOfThreads);
         request.setAttribute("forumThreadNames", nameOfThreads);
         request.getRequestDispatcher("displayThreads.jsp").forward(request, response);
