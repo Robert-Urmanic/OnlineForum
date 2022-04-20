@@ -22,12 +22,15 @@ public class ServletInsert extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/forum", "root", "root")) {
-            String prikaz = "INSERT INTO forum.forumtext(text, threadId) VALUES (?,?);";
+            String prikaz = "INSERT INTO forum.forumtext(text, threadId, dateOfText) VALUES (?,?,?);";
 
             PreparedStatement preparedStatement = connection.prepareStatement(prikaz);
 
+            java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+
             preparedStatement.setString(1, request.getParameter("text"));
             preparedStatement.setString(2, request.getParameter("idThread"));
+            preparedStatement.setTimestamp(3, date);
 
             preparedStatement.execute();
 

@@ -22,6 +22,7 @@ public class ServletThread extends HttpServlet {
         if (request.getParameter("showForum") != null || request.getAttribute("run") != null) {
             List<String> forumText = new ArrayList<>();
             List<Integer> idOfText = new ArrayList<>();
+            List<String> dateOfMessage = new ArrayList<>();
             String sendText = "";
             String id = request.getParameter("idThread");
             try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/forum", "root", "root")) {
@@ -34,6 +35,7 @@ public class ServletThread extends HttpServlet {
                 while (resultSet.next()) {
                     forumText.add(resultSet.getString("text"));
                     idOfText.add(resultSet.getInt("id"));
+                    dateOfMessage.add(resultSet.getString("dateOfText"));
                 }
 
             } catch (SQLException e) {
@@ -41,6 +43,7 @@ public class ServletThread extends HttpServlet {
             }
             request.setAttribute("idThread", id);
             request.setAttribute("forumText", forumText);
+            request.setAttribute("dateOfText", dateOfMessage);
             request.setAttribute("canDelete", request.getParameter("canDelete"));
             if (request.getParameter("canDelete") == null) {
                 request.setAttribute("canDelete", request.getAttribute("canDelete"));
