@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Vítejte na VŠB fóru</h1>
-<p><a href="ServletGetThreads">Vstoupit do fóra</a></p>
+<p><a href="ServletGetThreads"><button>Vstoupit do fóra</button></a></p>
 <!-- I hereby apologise to the poor soul who has to go through this code -->
 <br>
 <br>
