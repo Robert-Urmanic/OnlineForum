@@ -4,6 +4,7 @@
 <head>
     <title>VSB Forum</title>
     <link rel="shortcut icon" href="safari-pinned-tab.svg"/>
+    <meta charset="UTF-8">
 </head>
 <body>
 <%

@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Title</title>
-
+    <meta charset="UTF-8">
 </head>
 <body>
 <%

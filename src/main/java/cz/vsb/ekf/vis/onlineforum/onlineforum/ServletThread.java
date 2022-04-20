@@ -18,6 +18,7 @@ public class ServletThread extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         if (request.getParameter("showForum") != null || request.getAttribute("run") != null) {
             List<String> forumText = new ArrayList<>();
             List<Integer> idOfText = new ArrayList<>();
