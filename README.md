@@ -11,7 +11,7 @@ Development of online forum
 6. ~~Add CSS~~
 7. ~~UTF-8~~
 8. ~~Use case~~
-9. Presentation
+9. ~~Presentation~~
 #### ~~Add other ideas!~~
 
 ## Possible future plans
